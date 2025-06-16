@@ -208,9 +208,18 @@ export default function PostulacionProyecto() {
     }
 
     // CA N°8: Estudiante no cumple requisito cantidad materias regulares
-    if (nroLegajo === "44444") {
+    if (nroLegajo === "55555") {
       showError(
         "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias regulares requeridas",
+      )
+      return false
+    }
+
+    // Cambiar el anterior CA N°8 que usaba "44444" para materias aprobadas:
+    // CA N°7: Estudiante no cumple requisito cantidad materias aprobadas
+    if (nroLegajo === "44444") {
+      showError(
+        "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias aprobadas requeridas",
       )
       return false
     }
@@ -223,14 +232,11 @@ export default function PostulacionProyecto() {
     // La postulación se registra exitosamente
     showError("Postulación exitosa al proyecto", "success")
 
+    // Remover esta sección:
     // CA N°10: Cupo máximo del proyecto alcanzado (ocurre DESPUÉS de la postulación exitosa)
-    if (nroLegajo === "55555") {
-      // Simular que esta postulación llenó el cupo del proyecto
-      // Según el flujo: se cambian estados y se ejecuta algoritmo de selección
-      // Esto ocurre en background, el usuario no ve ningún mensaje de error
-      console.log("CA N°10: Cupo del proyecto alcanzado - ejecutando algoritmo de selección...")
-      // En una implementación real aquí se ejecutaría el algoritmo de selección
-    }
+    // if (nroLegajo === "55555") {
+    //   console.log("CA N°10: Cupo del proyecto alcanzado - ejecutando algoritmo de selección...")
+    // }
 
     setCurrentStep(6) // Pantalla de éxito
   }
@@ -343,6 +349,22 @@ export default function PostulacionProyecto() {
                     <span className="text-red-800 text-sm">{error.message}</span>
                   </div>
                 )}
+              </div>
+
+              {/* Cartelito azul con ejemplos de prueba */}
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <h3 className="text-blue-800 font-semibold mb-3">Ejemplos para prueba:</h3>
+                <div className="text-blue-700 text-sm space-y-1">
+                  <p>• Ingrese cualquier número válido (ej: 12345) para ver una postulación exitosa</p>
+                  <p>• Ingrese "abc" o "123" para simular datos no válidos</p>
+                  <p>• Ingrese "00000" para simular estudiante no encontrado</p>
+                  <p>• Ingrese "99999" para simular postulación fuera de fecha</p>
+                  <p>• Ingrese "11111" para simular cupo del puesto alcanzado</p>
+                  <p>• Ingrese "22222" para simular postulación existente</p>
+                  <p>• Ingrese "33333" para simular carrera incorrecta</p>
+                  <p>• Ingrese "44444" para simular materias aprobadas insuficientes</p>
+                  <p>• Ingrese "55555" para simular materias regulares insuficientes</p>
+                </div>
               </div>
 
               <div className="flex space-x-2">
