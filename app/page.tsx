@@ -55,7 +55,7 @@ const universidades: Universidad[] = [
 
 const proyectos: Proyecto[] = [
   {
-    numeroProyecto: "PROJ001",
+    numeroProyecto: "# 00001",
     nombreProyecto: "Sistema de Gestión Empresarial",
     descripcionProyecto:
       "Desarrollo de un sistema integral para la gestión de recursos empresariales con tecnologías modernas.",
@@ -66,7 +66,7 @@ const proyectos: Proyecto[] = [
     nombreEmpresa: "TechCorp Solutions",
   },
   {
-    numeroProyecto: "PROJ002",
+    numeroProyecto: "# 00002",
     nombreProyecto: "Plataforma E-Learning",
     descripcionProyecto: "Creación de una plataforma educativa online con funcionalidades avanzadas de aprendizaje.",
     fechaHoraInicioPostulaciones: "2025-06-20T08:00:00",
@@ -79,7 +79,7 @@ const proyectos: Proyecto[] = [
 
 const puestos: Puesto[] = [
   {
-    codPuesto: "DEV001",
+    codPuesto: "INS001",
     nombrePuesto: "Desarrollador Frontend",
     descripcionPuesto: "Desarrollo de interfaces de usuario utilizando React y tecnologías modernas de frontend.",
     horasDedicadas: 20,
@@ -89,7 +89,7 @@ const puestos: Puesto[] = [
     cantVacantes: 7,
   },
   {
-    codPuesto: "DEV002",
+    codPuesto: "INQ002",
     nombrePuesto: "Especialista en Producción Industrial",
     descripcionPuesto:
       "Optimización y control de procesos industriales, análisis de eficiencia y desarrollo de mejoras en plantas de producción.",
@@ -100,7 +100,7 @@ const puestos: Puesto[] = [
     cantVacantes: 5,
   },
   {
-    codPuesto: "ELEC001",
+    codPuesto: "INE001",
     nombrePuesto: "Analista Jr. en Automatización y Sistemas Embebidos",
     descripcionPuesto:
       "Diseño y desarrollo de sistemas electrónicos, programación de microcontroladores y mantenimiento de equipos industriales.",
@@ -146,7 +146,7 @@ export default function PostulacionProyecto() {
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
     // Simulación de casos de error específicos
-    if (nroLegajo === "00000") {
+    if (nroLegajo === "11111") {
       showError("No se ha podido encontrar el Estudiante. Intente nuevamente")
       setLoading(false)
       return false
@@ -180,13 +180,13 @@ export default function PostulacionProyecto() {
     }
 
     // CA N°4: Cupo máximo del puesto alcanzado
-    if (nroLegajo === "11111") {
+    if (nroLegajo === "22222") {
       showError("No se ha podido completar la postulación al Puesto. Se ha superado el número máximo de postulaciones")
       return false
     }
 
     // CA N°5: Postulación existente
-    if (nroLegajo === "12345") {
+    if (nroLegajo === "33333") {
       showError(
         `Usted ya se encuentra postulado a Puesto ${selectedPuesto.nombrePuesto} del Proyecto ${selectedProyecto?.nombreProyecto}`,
       )
@@ -194,13 +194,13 @@ export default function PostulacionProyecto() {
     }
 
     // CA N°6: Estudiante no cumple requisito de carrera
-    if (nroLegajo === "22222") {
+    if (nroLegajo === "44444") {
       showError("No es posible postularse al puesto seleccionado. No pertenece a la carrera solicitada")
       return false
     }
 
     // CA N°7: Estudiante no cumple requisito cantidad materias aprobadas
-    if (nroLegajo === "33333") {
+    if (nroLegajo === "55555") {
       showError(
         "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias aprobadas requeridas",
       )
@@ -208,21 +208,14 @@ export default function PostulacionProyecto() {
     }
 
     // CA N°8: Estudiante no cumple requisito cantidad materias regulares
-    if (nroLegajo === "55555") {
+    if (nroLegajo === "66666") {
       showError(
         "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias regulares requeridas",
       )
       return false
     }
 
-    // Cambiar el anterior CA N°8 que usaba "44444" para materias aprobadas:
-    // CA N°7: Estudiante no cumple requisito cantidad materias aprobadas
-    if (nroLegajo === "44444") {
-      showError(
-        "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias aprobadas requeridas",
-      )
-      return false
-    }
+    
 
     // Si todas las validaciones pasan, proceder con la postulación
     setLoading(true)
@@ -232,11 +225,6 @@ export default function PostulacionProyecto() {
     // La postulación se registra exitosamente
     showError("Postulación exitosa al proyecto", "success")
 
-    // Remover esta sección:
-    // CA N°10: Cupo máximo del proyecto alcanzado (ocurre DESPUÉS de la postulación exitosa)
-    // if (nroLegajo === "55555") {
-    //   console.log("CA N°10: Cupo del proyecto alcanzado - ejecutando algoritmo de selección...")
-    // }
 
     setCurrentStep(6) // Pantalla de éxito
   }
@@ -378,13 +366,13 @@ export default function PostulacionProyecto() {
                 <div className="text-blue-700 text-sm space-y-1">
                   <p>• Ingrese cualquier número válido (ej: 12345) para ver una postulación exitosa.</p>
                   <p>• Ingrese texto o números incompletos para simular datos no válidos.</p>
-                  <p>• Ingrese "00000" para simular estudiante no encontrado.</p>
+                  <p>• Ingrese "11111" para simular estudiante no encontrado.</p>
                   <p>• Ingrese "99999" para simular postulación fuera de fecha.</p>
-                  <p>• Ingrese "11111" para simular cupo del puesto alcanzado.</p>
-                  <p>• Ingrese "22222" para simular postulación existente.</p>
-                  <p>• Ingrese "33333" para simular carrera incorrecta.</p>
-                  <p>• Ingrese "44444" para simular materias aprobadas insuficientes.</p>
-                  <p>• Ingrese "55555" para simular materias regulares insuficientes.</p>
+                  <p>• Ingrese "22222" para simular cupo del puesto alcanzado.</p>
+                  <p>• Ingrese "33333" para simular postulación existente.</p>
+                  <p>• Ingrese "44444" para simular carrera incorrecta.</p>
+                  <p>• Ingrese "55555" para simular materias aprobadas insuficientes.</p>
+                  <p>• Ingrese "66666" para simular materias regulares insuficientes.</p>
                 </div>
               </div>
             </CardContent>
