@@ -86,29 +86,29 @@ const puestos: Puesto[] = [
     nombreCarrera: "Ingeniería en Sistemas",
     cantMateriasAprobadasReq: 25,
     cantMateriasRegularesReq: 5,
-    cantVacantes: 2,
+    cantVacantes: 7,
   },
   {
     codPuesto: "DEV002",
-    nombrePuesto: "Ingeniero de Procesos",
+    nombrePuesto: "Especialista en Producción Industrial",
     descripcionPuesto:
       "Optimización y control de procesos industriales, análisis de eficiencia y desarrollo de mejoras en plantas de producción.",
     horasDedicadas: 25,
     nombreCarrera: "Ingeniería Química",
     cantMateriasAprobadasReq: 30,
     cantMateriasRegularesReq: 3,
-    cantVacantes: 1,
+    cantVacantes: 5,
   },
   {
     codPuesto: "ELEC001",
-    nombrePuesto: "Ingeniero Electrónico",
+    nombrePuesto: "Analista Jr. en Automatización y Sistemas Embebidos",
     descripcionPuesto:
       "Diseño y desarrollo de sistemas electrónicos, programación de microcontroladores y mantenimiento de equipos industriales.",
     horasDedicadas: 20,
     nombreCarrera: "Ingeniería Electrónica",
     cantMateriasAprobadasReq: 28,
     cantMateriasRegularesReq: 4,
-    cantVacantes: 2,
+    cantVacantes: 6,
   },
 ]
 
@@ -264,7 +264,7 @@ export default function PostulacionProyecto() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Sistema de Postulación a Proyectos</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Sistema de Prácticas Profesionales</h1>
           <p className="text-gray-600">Complete el proceso paso a paso para postularse a un proyecto</p>
         </div>
 
@@ -301,7 +301,9 @@ export default function PostulacionProyecto() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="universidad">Universidad</Label>
+                <Label htmlFor="universidad">
+                  Universidad <span className="text-red-500">*</span>
+                </Label>
                 <Select value={selectedUniversidad} onValueChange={setSelectedUniversidad}>
                   <SelectTrigger>
                     <SelectValue placeholder="Seleccione una universidad" />
@@ -334,7 +336,9 @@ export default function PostulacionProyecto() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="legajo">Número de Legajo</Label>
+                <Label htmlFor="legajo">
+                  Número de Legajo <span className="text-red-500">*</span>
+                </Label>
                 <Input
                   id="legajo"
                   type="text"
@@ -349,22 +353,6 @@ export default function PostulacionProyecto() {
                     <span className="text-red-800 text-sm">{error.message}</span>
                   </div>
                 )}
-              </div>
-
-              {/* Cartelito azul con ejemplos de prueba */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <h3 className="text-blue-800 font-semibold mb-3">Ejemplos para prueba:</h3>
-                <div className="text-blue-700 text-sm space-y-1">
-                  <p>• Ingrese cualquier número válido (ej: 12345) para ver una postulación exitosa</p>
-                  <p>• Ingrese "abc" o "123" para simular datos no válidos</p>
-                  <p>• Ingrese "00000" para simular estudiante no encontrado</p>
-                  <p>• Ingrese "99999" para simular postulación fuera de fecha</p>
-                  <p>• Ingrese "11111" para simular cupo del puesto alcanzado</p>
-                  <p>• Ingrese "22222" para simular postulación existente</p>
-                  <p>• Ingrese "33333" para simular carrera incorrecta</p>
-                  <p>• Ingrese "44444" para simular materias aprobadas insuficientes</p>
-                  <p>• Ingrese "55555" para simular materias regulares insuficientes</p>
-                </div>
               </div>
 
               <div className="flex space-x-2">
@@ -382,6 +370,22 @@ export default function PostulacionProyecto() {
                 >
                   {loading ? "Validando..." : "Continuar"}
                 </Button>
+              </div>
+
+              {/* Cartelito azul con ejemplos de prueba - MOVIDO ARRIBA DE LOS BOTONES */}
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <h3 className="text-blue-800 font-semibold mb-3">Ejemplos para prueba:</h3>
+                <div className="text-blue-700 text-sm space-y-1">
+                  <p>• Ingrese cualquier número válido (ej: 12345) para ver una postulación exitosa.</p>
+                  <p>• Ingrese texto o números incompletos para simular datos no válidos.</p>
+                  <p>• Ingrese "00000" para simular estudiante no encontrado.</p>
+                  <p>• Ingrese "99999" para simular postulación fuera de fecha.</p>
+                  <p>• Ingrese "11111" para simular cupo del puesto alcanzado.</p>
+                  <p>• Ingrese "22222" para simular postulación existente.</p>
+                  <p>• Ingrese "33333" para simular carrera incorrecta.</p>
+                  <p>• Ingrese "44444" para simular materias aprobadas insuficientes.</p>
+                  <p>• Ingrese "55555" para simular materias regulares insuficientes.</p>
+                </div>
               </div>
             </CardContent>
           </Card>
