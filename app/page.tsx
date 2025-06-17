@@ -55,7 +55,7 @@ const universidades: Universidad[] = [
 
 const proyectos: Proyecto[] = [
   {
-    numeroProyecto: "# 00001",
+    numeroProyecto: "00001",
     nombreProyecto: "Sistema de Gestión Empresarial",
     descripcionProyecto:
       "Desarrollo de un sistema integral para la gestión de recursos empresariales con tecnologías modernas.",
@@ -66,7 +66,7 @@ const proyectos: Proyecto[] = [
     nombreEmpresa: "TechCorp Solutions",
   },
   {
-    numeroProyecto: "# 00002",
+    numeroProyecto: "00002",
     nombreProyecto: "Plataforma E-Learning",
     descripcionProyecto: "Creación de una plataforma educativa online con funcionalidades avanzadas de aprendizaje.",
     fechaHoraInicioPostulaciones: "2025-06-20T08:00:00",
@@ -89,7 +89,7 @@ const puestos: Puesto[] = [
     cantVacantes: 7,
   },
   {
-    codPuesto: "INQ002",
+    codPuesto: "INQ001",
     nombrePuesto: "Especialista en Producción Industrial",
     descripcionPuesto:
       "Optimización y control de procesos industriales, análisis de eficiencia y desarrollo de mejoras en plantas de producción.",
@@ -130,13 +130,15 @@ export default function PostulacionProyecto() {
     // Validar que no esté vacío
     if (!nroLegajo.trim()) {
       showError("Los datos ingresados no son válidos. Intenta nuevamente.")
+      setNroLegajo("") // Limpiar el campo
       return false
     }
 
-    // Validar formato de legajo (solo números, mínimo 4 dígitos, máximo 8 dígitos)
-    const legajoRegex = /^\d{4,8}$/
+    // Validar formato de legajo (solo números, mínimo 4 dígitos, máximo 5 dígitos)
+    const legajoRegex = /^\d{4,5}$/
     if (!legajoRegex.test(nroLegajo.trim())) {
       showError("Los datos ingresados no son válidos. Intenta nuevamente.")
+      setNroLegajo("") // Limpiar el campo
       return false
     }
 
@@ -145,13 +147,16 @@ export default function PostulacionProyecto() {
     // Simulación de validación con sistema académico
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
-    // Simulación de casos de error específicos
-    if (nroLegajo === "11111") {
+    // Solo el caso "00000" falla en la validación inicial (estudiante no encontrado)
+    if (nroLegajo === "00000") {
       showError("No se ha podido encontrar el Estudiante. Intente nuevamente")
+      setNroLegajo("") // Limpiar el campo
       setLoading(false)
       return false
     }
 
+    // Todos los demás casos de prueba pasan la validación inicial
+    // Los errores específicos se manejan en handlePostulacion()
     setLoading(false)
     return true
   }
@@ -180,13 +185,13 @@ export default function PostulacionProyecto() {
     }
 
     // CA N°4: Cupo máximo del puesto alcanzado
-    if (nroLegajo === "22222") {
+    if (nroLegajo === "11111") {
       showError("No se ha podido completar la postulación al Puesto. Se ha superado el número máximo de postulaciones")
       return false
     }
 
     // CA N°5: Postulación existente
-    if (nroLegajo === "33333") {
+    if (nroLegajo === "12345") {
       showError(
         `Usted ya se encuentra postulado a Puesto ${selectedPuesto.nombrePuesto} del Proyecto ${selectedProyecto?.nombreProyecto}`,
       )
@@ -194,13 +199,13 @@ export default function PostulacionProyecto() {
     }
 
     // CA N°6: Estudiante no cumple requisito de carrera
-    if (nroLegajo === "44444") {
+    if (nroLegajo === "22222") {
       showError("No es posible postularse al puesto seleccionado. No pertenece a la carrera solicitada")
       return false
     }
 
     // CA N°7: Estudiante no cumple requisito cantidad materias aprobadas
-    if (nroLegajo === "55555") {
+    if (nroLegajo === "33333") {
       showError(
         "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias aprobadas requeridas",
       )
@@ -208,14 +213,21 @@ export default function PostulacionProyecto() {
     }
 
     // CA N°8: Estudiante no cumple requisito cantidad materias regulares
-    if (nroLegajo === "66666") {
+    if (nroLegajo === "55555") {
       showError(
         "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias regulares requeridas",
       )
       return false
     }
 
-    
+    // Cambiar el anterior CA N°8 que usaba "44444" para materias aprobadas:
+    // CA N°7: Estudiante no cumple requisito cantidad materias aprobadas
+    if (nroLegajo === "44444") {
+      showError(
+        "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias aprobadas requeridas",
+      )
+      return false
+    }
 
     // Si todas las validaciones pasan, proceder con la postulación
     setLoading(true)
@@ -224,7 +236,6 @@ export default function PostulacionProyecto() {
 
     // La postulación se registra exitosamente
     showError("Postulación exitosa al proyecto", "success")
-
 
     setCurrentStep(6) // Pantalla de éxito
   }
@@ -333,6 +344,7 @@ export default function PostulacionProyecto() {
                   placeholder="Ej: 12345"
                   value={nroLegajo}
                   onChange={(e) => setNroLegajo(e.target.value)}
+                  maxLength={5}
                 />
                 {/* Mensaje de error debajo del campo */}
                 {error.show && error.type === "error" && (
@@ -364,15 +376,16 @@ export default function PostulacionProyecto() {
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <h3 className="text-blue-800 font-semibold mb-3">Ejemplos para prueba:</h3>
                 <div className="text-blue-700 text-sm space-y-1">
-                  <p>• Ingrese cualquier número válido (ej: 12345) para ver una postulación exitosa.</p>
+                  <p>• Ingrese cualquier número válido para ver una postulación exitosa.</p>
                   <p>• Ingrese texto o números incompletos para simular datos no válidos.</p>
-                  <p>• Ingrese "11111" para simular estudiante no encontrado.</p>
+                  <p>• Ingrese "00000" para simular estudiante no encontrado.</p>
                   <p>• Ingrese "99999" para simular postulación fuera de fecha.</p>
-                  <p>• Ingrese "22222" para simular cupo del puesto alcanzado.</p>
-                  <p>• Ingrese "33333" para simular postulación existente.</p>
-                  <p>• Ingrese "44444" para simular carrera incorrecta.</p>
-                  <p>• Ingrese "55555" para simular materias aprobadas insuficientes.</p>
-                  <p>• Ingrese "66666" para simular materias regulares insuficientes.</p>
+                  <p>• Ingrese "11111" para simular cupo del puesto alcanzado.</p>
+                  <p>• Ingrese "12345" para simular postulación existente.</p>
+                  <p>• Ingrese "22222" para simular carrera incorrecta.</p>
+                  <p>• Ingrese "33333" para simular materias aprobadas insuficientes.</p>
+                  <p>• Ingrese "44444" para simular materias aprobadas insuficientes.</p>
+                  <p>• Ingrese "55555" para simular materias regulares insuficientes.</p>
                 </div>
               </div>
             </CardContent>
