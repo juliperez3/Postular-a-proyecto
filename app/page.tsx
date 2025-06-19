@@ -191,7 +191,7 @@ export default function PostulacionProyecto() {
     }
 
     // CA N°5: Postulación existente
-    if (nroLegajo === "12345") {
+    if (nroLegajo === "22222") {
       showError(
         `Usted ya se encuentra postulado a Puesto ${selectedPuesto.nombrePuesto} del Proyecto ${selectedProyecto?.nombreProyecto}`,
       )
@@ -199,30 +199,21 @@ export default function PostulacionProyecto() {
     }
 
     // CA N°6: Estudiante no cumple requisito de carrera
-    if (nroLegajo === "22222") {
+    if (nroLegajo === "33333") {
       showError("No es posible postularse al puesto seleccionado. No pertenece a la carrera solicitada")
       return false
     }
 
-    // CA N°7: Estudiante no cumple requisito cantidad materias aprobadas
-    if (nroLegajo === "33333") {
-      showError(
-        "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias aprobadas requeridas",
-      )
-      return false
-    }
-
-    // CA N°8: Estudiante no cumple requisito cantidad materias regulares
-    if (nroLegajo === "55555") {
+    // CA N°7: Estudiante no cumple requisito cantidad materias regulares
+    if (nroLegajo === "44444") {
       showError(
         "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias regulares requeridas",
       )
       return false
     }
 
-    // Cambiar el anterior CA N°8 que usaba "44444" para materias aprobadas:
-    // CA N°7: Estudiante no cumple requisito cantidad materias aprobadas
-    if (nroLegajo === "44444") {
+    // CA N°8: Estudiante no cumple requisito cantidad materias aprobadas
+    if (nroLegajo === "55555") {
       showError(
         "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias aprobadas requeridas",
       )
@@ -381,11 +372,10 @@ export default function PostulacionProyecto() {
                   <p>• Ingrese "00000" para simular estudiante no encontrado.</p>
                   <p>• Ingrese "99999" para simular postulación fuera de fecha.</p>
                   <p>• Ingrese "11111" para simular cupo del puesto alcanzado.</p>
-                  <p>• Ingrese "12345" para simular postulación existente.</p>
-                  <p>• Ingrese "22222" para simular carrera incorrecta.</p>
-                  <p>• Ingrese "33333" para simular materias aprobadas insuficientes.</p>
-                  <p>• Ingrese "44444" para simular materias aprobadas insuficientes.</p>
-                  <p>• Ingrese "55555" para simular materias regulares insuficientes.</p>
+                  <p>• Ingrese "22222" para simular postulación existente.</p>
+                  <p>• Ingrese "33333" para simular carrera incorrecta.</p>
+                  <p>• Ingrese "44444" para simular materias regulares insuficientes.</p>
+                  <p>• Ingrese "55555" para simular materias aprobadas insuficientes.</p>
                 </div>
               </div>
             </CardContent>
