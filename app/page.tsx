@@ -190,7 +190,7 @@ export default function PostulacionProyecto() {
 
     // CA N°3: Postulación fuera de fecha
     if (nroLegajo === "99999") {
-      showError(`La postulación al proyecto ${selectedProyecto?.nombreProyecto} ha cerrado.`)
+      showError(`El periodo de postulaciones al proyecto ${selectedProyecto?.nombreProyecto} ha cerrado.`)
       return false
     }
 
