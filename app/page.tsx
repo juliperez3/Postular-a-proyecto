@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -59,20 +61,20 @@ const proyectos: Proyecto[] = [
     nombreProyecto: "Sistema de Gestión Empresarial",
     descripcionProyecto:
       "Desarrollo de un sistema integral para la gestión de recursos empresariales con tecnologías modernas.",
-    fechaHoraInicioPostulaciones: "2025-06-15T09:00:00",
-    fechaHoraCierrePostulaciones: "2025-08-15T18:00:00",
-    fechaInicioActividades: "2025-09-15T09:00:00",
-    fechaFinProyecto: "2026-02-28T18:00:00",
+    fechaHoraInicioPostulaciones: "2025-06-15T14:30:00",
+    fechaHoraCierrePostulaciones: "2025-08-15T23:45:00",
+    fechaInicioActividades: "2025-09-15T08:15:00",
+    fechaFinProyecto: "2026-02-28T17:30:00",
     nombreEmpresa: "TechCorp Solutions",
   },
   {
     numeroProyecto: "00002",
     nombreProyecto: "Plataforma E-Learning",
     descripcionProyecto: "Creación de una plataforma educativa online con funcionalidades avanzadas de aprendizaje.",
-    fechaHoraInicioPostulaciones: "2025-06-20T08:00:00",
-    fechaHoraCierrePostulaciones: "2025-07-20T17:00:00",
-    fechaInicioActividades: "2025-08-20T09:00:00",
-    fechaFinProyecto: "2026-01-15T18:00:00",
+    fechaHoraInicioPostulaciones: "2025-06-20T07:00:00",
+    fechaHoraCierrePostulaciones: "2025-07-20T22:30:00",
+    fechaInicioActividades: "2025-08-20T13:45:00",
+    fechaFinProyecto: "2026-01-15T16:00:00",
     nombreEmpresa: "EduTech Innovations",
   },
 ]
@@ -126,6 +128,14 @@ export default function PostulacionProyecto() {
     setTimeout(() => setError({ show: false, message: "", type: "error" }), 5000)
   }
 
+  const handleLegajoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    // Solo permitir números y máximo 5 dígitos
+    if (/^\d{0,5}$/.test(value)) {
+      setNroLegajo(value)
+    }
+  }
+
   const validateLegajo = async () => {
     // Validar que no esté vacío
     if (!nroLegajo.trim()) {
@@ -134,8 +144,8 @@ export default function PostulacionProyecto() {
       return false
     }
 
-    // Validar formato de legajo (solo números, mínimo 4 dígitos, máximo 5 dígitos)
-    const legajoRegex = /^\d{4,5}$/
+    // Validar formato de legajo (solo números, exactamente 5 dígitos)
+    const legajoRegex = /^\d{5}$/
     if (!legajoRegex.test(nroLegajo.trim())) {
       showError("Los datos ingresados no son válidos. Intenta nuevamente.")
       setNroLegajo("") // Limpiar el campo
@@ -241,12 +251,13 @@ export default function PostulacionProyecto() {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("es-AR", {
+    return new Date(dateString).toLocaleDateString("en-US", {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
       hour: "2-digit",
       minute: "2-digit",
+      hour12: true, // Esto habilita AM/PM
     })
   }
 
@@ -334,7 +345,7 @@ export default function PostulacionProyecto() {
                   type="text"
                   placeholder="Ej: 12345"
                   value={nroLegajo}
-                  onChange={(e) => setNroLegajo(e.target.value)}
+                  onChange={handleLegajoChange}
                   maxLength={5}
                 />
                 {/* Mensaje de error debajo del campo */}
