@@ -242,9 +242,9 @@ export default function PostulacionProyecto() {
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("es-AR", {
+      day: "2-digit",
+      month: "2-digit",
       year: "numeric",
-      month: "long",
-      day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
     })
@@ -365,7 +365,7 @@ export default function PostulacionProyecto() {
 
               {/* Cartelito azul con ejemplos de prueba - MOVIDO ARRIBA DE LOS BOTONES */}
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <h3 className="text-blue-800 font-semibold mb-3">Ejemplos para prueba:</h3>
+                <h3 className="text-blue-800 font-semibold mb-3 text-base">Ejemplos para prueba:</h3>
                 <div className="text-blue-700 text-sm space-y-1">
                   <p>• Ingrese cualquier número válido para ver una postulación exitosa.</p>
                   <p>• Ingrese texto o números incompletos para simular datos no válidos.</p>
@@ -417,17 +417,17 @@ export default function PostulacionProyecto() {
 
                     <p className="text-gray-700 mb-3 text-sm">{proyecto.descripcionProyecto}</p>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs text-gray-600">
+                    <div className="flex justify-between items-center text-xs text-gray-600">
                       <div className="flex items-center">
-                        <Clock className="w-3 h-3 mr-1" />
+                        <Clock className="w-3 h-3 mr-1 text-red-500" />
                         <span>Cierre postulaciones: {formatDate(proyecto.fechaHoraCierrePostulaciones)}</span>
                       </div>
                       <div className="flex items-center">
-                        <Calendar className="w-3 h-3 mr-1" />
+                        <Calendar className="w-3 h-3 mr-1 text-green-500" />
                         <span>Inicio actividades: {formatDate(proyecto.fechaInicioActividades)}</span>
                       </div>
                       <div className="flex items-center">
-                        <Calendar className="w-3 h-3 mr-1" />
+                        <Calendar className="w-3 h-3 mr-1 text-blue-500" />
                         <span>Fin proyecto: {formatDate(proyecto.fechaFinProyecto)}</span>
                       </div>
                     </div>
