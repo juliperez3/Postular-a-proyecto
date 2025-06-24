@@ -190,7 +190,7 @@ export default function PostulacionProyecto() {
 
     // CA N°3: Postulación fuera de fecha
     if (nroLegajo === "99999") {
-      showError(`El periodo de postulaciones al proyecto ${selectedProyecto?.nombreProyecto} ha cerrado.`)
+      showError(`No se ha podido completar la postulación al Puesto. El periodo de postulaciones al proyecto ${selectedProyecto?.nombreProyecto} ha cerrado.`)
       return false
     }
 
@@ -203,27 +203,27 @@ export default function PostulacionProyecto() {
     // CA N°5: Postulación existente
     if (nroLegajo === "22222") {
       showError(
-        `Usted ya se encuentra postulado a Puesto ${selectedPuesto.nombrePuesto} del Proyecto ${selectedProyecto?.nombreProyecto}`,
+        `No se ha podido completar la postulación al Puesto. Usted ya tiene una postulación en curso`,
       )
       return false
     }
 
     // CA N°6: Estudiante dado de baja
     if (nroLegajo === "33333") {
-      showError("No es posible postularse. El estudiante se encuentra dado de baja")
+      showError("No se ha podido completar la postulación al Puesto. El estudiante se encuentra dado de baja")
       return false
     }
 
     // CA N°7: Estudiante no cumple requisito de carrera
     if (nroLegajo === "44444") {
-      showError("No es posible postularse al puesto seleccionado. No pertenece a la carrera solicitada")
+      showError("No se ha podido completar la postulación al Puesto. No pertenece a la carrera solicitada")
       return false
     }
 
     // CA N°8: Estudiante no cumple requisito cantidad materias regulares
     if (nroLegajo === "55555") {
       showError(
-        "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias regulares requeridas",
+        "No se ha podido completar la postulación al Puesto. No cumple con la cantidad de materias regulares requeridas",
       )
       return false
     }
@@ -231,7 +231,7 @@ export default function PostulacionProyecto() {
     // CA N°9: Estudiante no cumple requisito cantidad materias aprobadas
     if (nroLegajo === "66666") {
       showError(
-        "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias aprobadas requeridas",
+        "No se ha podido completar la postulación al Puesto. No cumple con la cantidad de materias aprobadas requeridas",
       )
       return false
     }
