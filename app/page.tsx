@@ -130,8 +130,8 @@ export default function PostulacionProyecto() {
 
   const handleLegajoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
-    // Solo permitir números y máximo 5 dígitos
-    if (/^\d{0,5}$/.test(value)) {
+    // Permitir escribir cualquier cosa hasta 5 caracteres máximo
+    if (value.length <= 5) {
       setNroLegajo(value)
     }
   }
@@ -208,22 +208,28 @@ export default function PostulacionProyecto() {
       return false
     }
 
-    // CA N°6: Estudiante no cumple requisito de carrera
+    // CA N°6: Estudiante dado de baja
     if (nroLegajo === "33333") {
+      showError("No es posible postularse. El estudiante se encuentra dado de baja")
+      return false
+    }
+
+    // CA N°7: Estudiante no cumple requisito de carrera
+    if (nroLegajo === "44444") {
       showError("No es posible postularse al puesto seleccionado. No pertenece a la carrera solicitada")
       return false
     }
 
-    // CA N°7: Estudiante no cumple requisito cantidad materias regulares
-    if (nroLegajo === "44444") {
+    // CA N°8: Estudiante no cumple requisito cantidad materias regulares
+    if (nroLegajo === "55555") {
       showError(
         "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias regulares requeridas",
       )
       return false
     }
 
-    // CA N°8: Estudiante no cumple requisito cantidad materias aprobadas
-    if (nroLegajo === "55555") {
+    // CA N°9: Estudiante no cumple requisito cantidad materias aprobadas
+    if (nroLegajo === "66666") {
       showError(
         "No es posible postularse al puesto seleccionado. No cumple con la cantidad de materias aprobadas requeridas",
       )
@@ -346,7 +352,6 @@ export default function PostulacionProyecto() {
                   placeholder="Ej: 12345"
                   value={nroLegajo}
                   onChange={handleLegajoChange}
-                  maxLength={5}
                 />
                 {/* Mensaje de error debajo del campo */}
                 {error.show && error.type === "error" && (
@@ -384,9 +389,10 @@ export default function PostulacionProyecto() {
                   <p>• Ingrese "99999" para simular postulación fuera de fecha.</p>
                   <p>• Ingrese "11111" para simular cupo del puesto alcanzado.</p>
                   <p>• Ingrese "22222" para simular postulación existente.</p>
-                  <p>• Ingrese "33333" para simular carrera incorrecta.</p>
-                  <p>• Ingrese "44444" para simular materias regulares insuficientes.</p>
-                  <p>• Ingrese "55555" para simular materias aprobadas insuficientes.</p>
+                  <p>• Ingrese "33333" para simular estudiante dado de baja.</p>
+                  <p>• Ingrese "44444" para simular carrera incorrecta.</p>
+                  <p>• Ingrese "55555" para simular materias regulares insuficientes.</p>
+                  <p>• Ingrese "66666" para simular materias aprobadas insuficientes.</p>
                 </div>
               </div>
             </CardContent>
